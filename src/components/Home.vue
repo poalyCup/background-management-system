@@ -8,17 +8,18 @@
         <el-button type="info" @click="logout">退出</el-button>
       </el-header>
       <el-container>
-        <el-aside :width="isCollapse? '':'150px'">
+        <!-- <el-aside :width="isCollapse? '':'150px'"> -->
           <!-- 菜单栏收起和展开 -->
-          <div @click="menuCollapse">|||</div>
+          <!-- <div @click="menuCollapse">|||</div>
           <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
-                    unique-opened :collapse="isCollapse" :collapse-transition="false">
+                    unique-opened :collapse="isCollapse" :collapse-transition="false" router
+                    :default-active="$route.path">
             <el-submenu :index="item.id + '' " v-for="item in menuList" :key="item.id">
               <template slot="title">
                 <i :class="iconList[item.id]"></i>
                 <span>{{ item.authName }}</span>
               </template>
-              <el-menu-item :index="iitem.id + ''" v-for="iitem in item.children" :key="iitem.id">
+              <el-menu-item :index="'/'+iitem.path" v-for="iitem in item.children" :key="iitem.id">
                 <template>
                   <i class="el-icon-menu"></i>
                   <span>{{ iitem.authName }}</span>
@@ -26,7 +27,8 @@
               </el-menu-item>
             </el-submenu>
           </el-menu>
-        </el-aside>
+        </el-aside> -->
+        <MenuTab :menuList="menuList"></MenuTab>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -36,9 +38,13 @@
 
 <script>
 import { getMenuList } from '../network/home'
+import MenuTab from '../views/home/MenuTab'
 
 export default {
   name: 'Hoem',
+  components: {
+    MenuTab
+  },
   data() {
     return {
       menuList: [],
@@ -63,7 +69,6 @@ export default {
   },
   created (){
     getMenuList().then(res => {
-      console.log(res)
       this.menuList = res.data
     })
   }
