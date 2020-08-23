@@ -8,7 +8,7 @@ export function request (config) {
     //axios拦截器
     //请求拦截
     instance.interceptors.request.use(config => {
-        //console.log(config)
+        // console.log(config)
         //拦截后必须将config   return出去，不然网络无法继续请求
         config.headers.Authorization = window.sessionStorage.getItem('token')
         // console.log(config)

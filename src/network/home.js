@@ -27,10 +27,16 @@ export function changeUserState (userInfo) {
 }
 
 export function addNewUser (newUserInfo) {
+  console.log(newUserInfo)
   return request({
     url: '/users',
     method: 'post',
-    params: { ...newUserInfo }
+    params: { 
+      username: newUserInfo.username,
+      password: newUserInfo.password,
+      email: newUserInfo.email,
+      mobile: newUserInfo.mobile
+     }
   })
 }
 
@@ -44,7 +50,7 @@ export function getUserInfoById (id) {
 
 //对编辑后的用户信息进行保存
 export function saveUserInfoById (editNewUserInfo) {
-  console.log(editNewUserInfo)
+  // console.log(editNewUserInfo)
   return request({
     url: `/users/${editNewUserInfo.id}`,
     method: 'put',
@@ -52,5 +58,13 @@ export function saveUserInfoById (editNewUserInfo) {
       email: editNewUserInfo.email,
       mobile: editNewUserInfo.mobile
      }
+  })
+}
+
+//根据用户id删除该用户
+export function deleteUserById (id) {
+  return request({
+    url: `/users/${id}`,
+    method: 'delete'
   })
 }

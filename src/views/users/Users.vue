@@ -7,7 +7,8 @@
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb> 
     <!-- 用户列表单 -->
-    <user-list @addDialogVisible="addUserDialogVisibleChange" @editDialogVisible="editUserDialogVisibleChange"></user-list>
+    <user-list @addDialogVisible="addUserDialogVisibleChange" @editDialogVisible="editUserDialogVisibleChange"
+                @deleteUser="deleteUser"></user-list>
     <!-- 添加用户对话框 -->
     <el-dialog title="添加用户" :visible.sync="addUserDialogVisible" width="40%" center
                 @close="addUserDialogCancel">
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import { addNewUser, getUserInfoById, saveUserInfoById } from '../../network/home.js'
+import { addNewUser, getUserInfoById, saveUserInfoById, deleteUserById } from '../../network/home.js'
 import UserList from './UserList'
 // 防抖函数导入
 // import { debouce } from '../../common/util'
@@ -101,9 +102,7 @@ export default {
         ]
       },
       editUserDialogVisible: false,
-      editUserInfo: {
-
-      }
+      editUserInfo: {}
     }
   },
   methods: {
@@ -122,7 +121,7 @@ export default {
       this.$refs.addUserFormRef.validate(res => {
         if (res) {
           addNewUser(this.addUserForm).then(result => {
-            if (result.meta.status !== 200) {
+            if (result.meta.status !== 201) {
               return this.$message.error('用户添加失败，请重试！')
             }
           })
@@ -136,7 +135,6 @@ export default {
           return this.$message.error('获取用户信息失败！')
         }
         this.editUserInfo = res.data
-        console.log(this.editUserInfo)
         this.editUserDialogVisible = Boolean(bool.bool)
       })
     },
@@ -151,6 +149,14 @@ export default {
           return this.$message.error('用户信息修改失败！')
         }
         this.editUserDialogCancel()
+      })
+    },
+    //根据id删除用户
+    deleteUser (id) {
+      deleteUserById(id).then(res => {
+        if (res.meta.status !== 200) return this.$message.error('用户删除失败，请重试！')
+        // this.$router.go(0)
+        this.$message.success('用户删除成功！')
       })
     }
   }

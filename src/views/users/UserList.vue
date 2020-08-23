@@ -32,7 +32,7 @@
             <el-button type="primary" icon="el-icon-edit" size="small" @click="editUser(space.row.id)"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
-            <el-button type="danger" icon="el-icon-delete" size="small"></el-button>
+            <el-button type="danger" icon="el-icon-delete" size="small" @click="deleteUser(space.row.id)"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
             <el-button type="warning" icon="el-icon-setting" size="small"></el-button>
@@ -59,7 +59,7 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 5
+        pagesize: 10
       },
       total: 0,
       userList: [],
@@ -126,6 +126,13 @@ export default {
     //编辑用户信息按钮事件
     editUser (id) {
       this.$emit('editDialogVisible', {bool: 1, uid: id})
+    },
+    //删除用户
+    deleteUser (id) {
+      this.$emit('deleteUser', id)
+      setTimeout(() => {
+        this._getUserList(this.queryInfo)
+      }, 800);
     },
     //搜搜框内容改变事件
     currentQueryChanged () {
