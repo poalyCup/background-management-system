@@ -112,4 +112,7 @@ export default {
   .iconfont{
     margin-right: 10px;
   }
+  .el-main{
+    height: calc( 100vh - 60px );
+  }
 </style>

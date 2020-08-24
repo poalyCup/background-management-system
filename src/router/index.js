@@ -19,10 +19,12 @@ const routes = [
   {
     path: '/home',
     component: Home,
-    redirect: '/welcome',
+    redirect: '/roles',
     children: [
       {path: '/welcome', component: Welcome},
-      {path: '/users', component: Users}
+      {path: '/users', component: Users},
+      {path: '/rights', component: () => import('../views/power/Rights.vue')},
+      {path: '/roles', component: () => import('../views/power/Roles.vue')}
     ]
   }
 ]
