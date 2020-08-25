@@ -23,10 +23,10 @@
     <!-- 还是在这里获取数据修改数据方便 -->
     <el-dialog title="权限分配" :visible.sync="rightsAssignmentsDialogVisible" width="30%" >
       <el-tree :data="rightsTree" :props="rightsTreeProps" show-checkbox default-expand-all node-key="id"
-                :default-checked-keys="rightsTreeDefaulCheckedKeys"></el-tree>
+                :default-checked-keys="rightsTreeDefaulCheckedKeys" ref="rightsTreeRef"></el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="rightsAssignmentsDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="rightsAssignmentsDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="setRights">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getRolesList, getRightsTree } from '../../network/power'
+import { getRolesList, getRightsTree, setRoleRights } from '../../network/power'
 
 
 export default {
@@ -49,12 +49,15 @@ export default {
         label: 'authName',
         children: 'children'
       },
-      rightsTreeDefaulCheckedKeys: []
+      rightsTreeDefaulCheckedKeys: [],
+      //将要被更新权限的角色ID
+      roleId: ''
     }
   },
   methods: {
     //分配角色按钮点击事件
     roleAssignments (roles) {
+      this.roleId = roles.id
       getRightsTree().then(res => {
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
         this.rightsTree = res.data
@@ -64,6 +67,19 @@ export default {
         this.getRightsDefaultKeys(roles, this.rightsTreeDefaulCheckedKeys)
 
         this.rightsAssignmentsDialogVisible = true
+      })
+    },
+    //更新分配后的角色权限
+    setRights () {
+      const keys = [
+        ...this.$refs.rightsTreeRef.getCheckedKeys(),
+        ...this.$refs.rightsTreeRef.getHalfCheckedKeys()
+      ]
+      
+      setRoleRights(this.roleId, keys.join(',')).then(res => {
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+        getRolesList()
+        this.rightsAssignmentsDialogVisible = false
       })
     },
     //通过递归获取三级权限id数组

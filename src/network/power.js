@@ -23,3 +23,15 @@ export function getRightsTree () {
     method: 'get'
   })
 }
+
+//角色授权
+export function setRoleRights (roleId, rids) {
+  return request({
+    url: `/roles/${roleId}/rights`,
+    method: 'post',
+    params: {
+      rids: rids
+    }
+  })
+
+}
