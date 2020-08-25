@@ -7,6 +7,8 @@
       <el-breadcrumb-item>角色列表</el-breadcrumb-item>
     </el-breadcrumb>
     <RolesList></RolesList>
+
+    
   </div>
 </template>
 
@@ -18,6 +20,7 @@ export default {
   components: {
     RolesList
   }
+
 }
 </script>
 

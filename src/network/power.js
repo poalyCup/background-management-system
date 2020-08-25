@@ -15,3 +15,11 @@ export function getRolesList () {
     method: 'get'
   })
 }
+
+//获取角色权限树
+export function getRightsTree () {
+  return request({
+    url: '/rights/tree',
+    method: 'get'
+  })
+}

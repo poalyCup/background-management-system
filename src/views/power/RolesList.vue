@@ -11,33 +11,71 @@
       <el-table-column prop="roleName" label="角色名称" > </el-table-column>
       <el-table-column prop="roleDesc" label="角色描述" > </el-table-column>
       <el-table-column prop="level" label="操作" >
-        <template>
+        <template v-slot="space">
             <el-button type="primary" icon="el-icon-edit" size="small">编辑</el-button>
             <el-button type="danger" icon="el-icon-delete" size="small">删除</el-button>
-            <el-button type="warning" icon="el-icon-setting" size="small">分配角色</el-button>
+            <el-button type="warning" icon="el-icon-setting" size="small" @click="roleAssignments(space.row)">分配角色</el-button>
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 角色分配弹窗 -->
+    <!-- 还是在这里获取数据修改数据方便 -->
+    <el-dialog title="权限分配" :visible.sync="rightsAssignmentsDialogVisible" width="30%" >
+      <el-tree :data="rightsTree" :props="rightsTreeProps" show-checkbox default-expand-all node-key="id"
+                :default-checked-keys="rightsTreeDefaulCheckedKeys"></el-tree>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="rightsAssignmentsDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="rightsAssignmentsDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    
   </el-card>
 </template>
 
 <script>
-import { getRolesList } from '../../network/power'
+import { getRolesList, getRightsTree } from '../../network/power'
 
 
 export default {
   name: 'RolesList',
-  components: {
-    // RolesPowerDetail
-  },
   data() {
     return {
-      rolesList: []
+      rolesList: [],
+      rightsAssignmentsDialogVisible: false,
+      rightsTree: [],
+      rightsTreeProps: {
+        label: 'authName',
+        children: 'children'
+      },
+      rightsTreeDefaulCheckedKeys: []
+    }
+  },
+  methods: {
+    //分配角色按钮点击事件
+    roleAssignments (roles) {
+      getRightsTree().then(res => {
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+        this.rightsTree = res.data
+        
+        //获取该角色下拥有的三级权限的id数组
+        this.rightsTreeDefaulCheckedKeys = []
+        this.getRightsDefaultKeys(roles, this.rightsTreeDefaulCheckedKeys)
+
+        this.rightsAssignmentsDialogVisible = true
+      })
+    },
+    //通过递归获取三级权限id数组
+    getRightsDefaultKeys (node, arr) {
+      if (!node.children) return arr.push(node.id)
+      node.children.forEach(item => {
+        this.getRightsDefaultKeys(item, arr)
+      })
     }
   },
   created() {
     getRolesList().then(res => {
-      console.log(res)
       if (res.meta.status !== 200) return this.$message.error('角色列表数据获取失败！')
       this.rolesList = res.data
     })
