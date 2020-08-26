@@ -24,7 +24,9 @@ const routes = [
       {path: '/welcome', component: Welcome},
       {path: '/users', component: Users},
       {path: '/rights', component: () => import('../views/power/Rights.vue')},
-      {path: '/roles', component: () => import('../views/power/Roles.vue')}
+      {path: '/roles', component: () => import('../views/power/Roles.vue')},
+      {path: '/categories', component: () => import('../views/goods/Categories.vue')}
+
     ]
   }
 ]
