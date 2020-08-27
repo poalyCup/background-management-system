@@ -1,5 +1,6 @@
 <template>
   <el-card>
+    <el-button type="primary" @click="addCate">添加分类</el-button>
     <el-table :data="categoriesList" style="width: 100%;margin-bottom: 20px;" row-key="cat_id"
       border :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
       <el-table-column prop="cat_name" label="分类名称"></el-table-column>
@@ -16,12 +17,18 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 翻页功能栏 -->
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+      :current-page="queryInfo.pagenum" :page-sizes="[2, 5, 10, 20]" :page-size="queryInfo.pagesize" 
+      layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
   </el-card>
 </template>
 
 <script>
-import { getCategoriesList } from '../../network/goods'
-import Bus from '../../common/bus'
+import { getCategoriesList } from 'network/goods'
+import Bus from 'common/bus'
 
 export default {
   name: 'CategoriesList',
@@ -42,6 +49,17 @@ export default {
     },
     deleteCate (data) {
       this.$emit('deleteCateClick', data)
+    },
+
+    //翻页相关事件
+    //pagesize改变事件
+    handleSizeChange (size) {
+      // console.log(size)
+      this.queryInfo.pagesize = size
+    },
+    handleCurrentChange (currentPage) {
+      // console.log(currentPage)
+      this.queryInfo.pagenum = currentPage
     },
 
 

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getUsersList, changeUserState } from '../../network/home.js'
+import { getUsersList, changeUserState } from 'network/home.js'
 
 
 export default {

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { addNewUser, getUserInfoById, saveUserInfoById, deleteUserById } from '../../network/home.js'
+import { addNewUser, getUserInfoById, saveUserInfoById, deleteUserById } from 'network/home.js'
 import UserList from './UserList'
 // 防抖函数导入
 // import { debouce } from '../../common/util'

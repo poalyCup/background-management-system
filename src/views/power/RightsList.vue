@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getRightsList } from '../../network/power'
+import { getRightsList } from 'network/power'
 
 export default {
   name: 'RightsList',

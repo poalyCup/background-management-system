@@ -36,8 +36,8 @@
 
 <script>
 import CategoriesList from './CategoriesList'
-import { deleteCateByCatId, getCateInfoById, editCateInfoById } from '../../network/goods'
-import Bus from '../../common/bus'
+import { deleteCateByCatId, getCateInfoById, editCateInfoById } from 'network/goods'
+import Bus from 'common/bus'
 
 export default {
   name: 'Categories',

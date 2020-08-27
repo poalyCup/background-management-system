@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getRolesList, getRightsTree, setRoleRights } from '../../network/power'
+import { getRolesList, getRightsTree, setRoleRights } from 'network/power'
 
 
 export default {
