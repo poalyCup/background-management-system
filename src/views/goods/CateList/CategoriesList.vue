@@ -50,12 +50,16 @@ export default {
     deleteCate (data) {
       this.$emit('deleteCateClick', data)
     },
+    addCate () {
+      this.$emit('addCateClick')
+    },
 
     //翻页相关事件
     //pagesize改变事件
     handleSizeChange (size) {
       // console.log(size)
       this.queryInfo.pagesize = size
+
     },
     handleCurrentChange (currentPage) {
       // console.log(currentPage)
@@ -78,6 +82,14 @@ export default {
     Bus.$on("cateUpdate", () => {
       self._getCategoriesList()
     })
+  },
+  watch: {
+    queryInfo: {
+      handler: function(){
+        this._getCategoriesList()
+      },
+      deep: true
+    }
   }
 }
 </script>

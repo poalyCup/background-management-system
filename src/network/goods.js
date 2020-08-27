@@ -37,3 +37,27 @@ export function editCateInfoById (cateInfo) {
     }
   })
 }
+
+//获取两级的商品分类列表
+export function getTwoLevelsCateList () {
+  return request({
+    url: '/categories',
+    method: 'get',
+    params: {
+      type: 2
+    }
+  })
+}
+
+//添加分类
+export function addCate (cateInfo){
+  return request({
+    url: 'categories',
+    method: 'post',
+    params: { 
+      cat_pid: cateInfo.cat_pid,
+      cat_name: cateInfo.cat_name,
+      cat_level: cateInfo.cat_level
+     }
+  })
+}
