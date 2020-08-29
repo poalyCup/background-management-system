@@ -61,3 +61,14 @@ export function addCate (cateInfo){
      }
   })
 }
+
+//根据id和参数类型获取参数列表
+export function getAttrList (info) {
+  return request({
+    url: `categories/112/attributes`,
+    method: 'get',
+    params: {
+      sel: 'only'
+    }
+  })
+}
