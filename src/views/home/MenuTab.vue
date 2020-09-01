@@ -4,7 +4,7 @@
     <div @click="menuCollapse">|||</div>
     <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
               unique-opened :collapse="isCollapse" :collapse-transition="false" router
-              :default-active="$route.path">
+              :default-active="activeTab">
       <el-submenu :index="item.id + '' " v-for="item in menuList" :key="item.id">
         <template slot="title">
           <i :class="iconList[item.id]"></i>
@@ -49,9 +49,13 @@ export default {
       this.isCollapse = !this.isCollapse
     }
   },
-  created() {
-    
-  }
+  computed: {
+    activeTab () {
+      const path = '/' + this.$route.path.split('/')[1]
+      return path
+    }
+  },
+
 }
 </script>
 

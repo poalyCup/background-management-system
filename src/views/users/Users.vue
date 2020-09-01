@@ -30,7 +30,7 @@
     <el-dialog title="修改信息" :visible.sync="editUserDialogVisible" width="40%" center
                 @close="editUserDialogCancel">
       <!-- 添加用户的表单 -->
-      <el-form ref="editUserFormRef" label-width="80px" :model="editUserInfo" class="add-user-form"
+      <el-form ref="editUserFormRef" label-width="80px" :model="editUserInfo"
               :rules="addUserRule"  :required="true">
         <el-form-item label="用户名称"><el-input v-model="editUserInfo.username" disabled></el-input></el-form-item>
         <el-form-item label="邮箱" prop="email"><el-input v-model="editUserInfo.email"></el-input></el-form-item>

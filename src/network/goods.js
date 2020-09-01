@@ -72,3 +72,20 @@ export function getAttrList (info) {
     }
   })
 }
+
+//获取商品列表数据
+export function getGoodsList (queryInfo) {
+  return request({
+    url: 'goods',
+    method: 'get',
+    params: { ...queryInfo }
+  })
+}
+
+//根据商品id删除商品
+export function deleteGoodsBuId (id) {
+  return request({
+    url: `goods/${id}`,
+    method: 'delete'
+  })
+}

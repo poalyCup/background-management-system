@@ -26,7 +26,10 @@ const routes = [
       {path: '/rights', component: () => import('../views/power/Rights.vue')},
       {path: '/roles', component: () => import('../views/power/Roles.vue')},
       {path: '/categories', component: () => import('views/goods/CateList/Categories.vue')},
-      {path: '/params', component: () => import('views/goods/CateParams/CateParams.vue')}
+      {path: '/params', component: () => import('views/goods/CateParams/CateParams.vue')},
+      {path: '/goods', component: () => import('views/goods/goodsList/Goods.vue')},
+      {path: '/goods/add', component: () => import('views/goods/goodsList/AddGoods.vue')},
+
 
     ]
   }
