@@ -83,7 +83,7 @@ export function getGoodsList (queryInfo) {
 }
 
 //根据商品id删除商品
-export function deleteGoodsBuId (id) {
+export function deleteGoodsById (id) {
   return request({
     url: `goods/${id}`,
     method: 'delete'

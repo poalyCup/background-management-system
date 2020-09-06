@@ -80,7 +80,6 @@ export default {
       info.id = this.cateKeys[this.cateKeys.length -1]
       info.sel = this.activeName
       getAttrList(info).then(res => {
-        console.log(res)
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
         this.paramsList = res.data
       })
