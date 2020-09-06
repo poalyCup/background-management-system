@@ -17,10 +17,11 @@
         <el-step title="商品内容"></el-step>
         <el-step title="完成"></el-step>
       </el-steps>
-
+      <el-button @click="test">test</el-button>
       <el-form :required="true" :rules="addFormRules" :model="addGoodsForm" status-icon>
         <el-tabs v-model="activeIndex" tab-position="left" stretch>
-          <el-tab-pane label="基本信息" name="0">
+          <!-- 基本信息 -->
+          <el-tab-pane label="基本信息" name="0" >
             <el-form-item label="商品分类" label-width="300" :required="true">
               <el-cascader v-model="cateKeys" :options="categoriesList" size="medium"
                         :props="{label: 'cat_name', value: 'cat_id', children: 'children', expandTrigger: 'hover'}"
@@ -39,7 +40,10 @@
               <el-input placeholder="请输入商品数量" v-model.number="addGoodsForm.goods_number"></el-input>
             </el-form-item>
           </el-tab-pane>
-          <el-tab-pane label="商品属性" name="1">配置管理</el-tab-pane>
+          <!-- 商品属性 -->
+          <el-tab-pane label="商品属性" name="1">
+            
+          </el-tab-pane>
           <el-tab-pane label="商品图片" name="2">角色管理</el-tab-pane>
           <el-tab-pane label="商品内容" name="3">定时任务补偿</el-tab-pane>
         </el-tabs>
@@ -49,7 +53,7 @@
 </template>
 
 <script>
-import { getCategoriesList } from 'network/goods'
+import { getCategoriesList, getAttrList } from 'network/goods'
 
 export default {
   name: "AddGoods",
@@ -98,6 +102,13 @@ export default {
     }
   },
   methods: {
+    test () {
+      getAttrList().then(res => {
+        console.log(res)
+      })
+    },
+
+    //网络请求方法
     _getCateList(){
       getCategoriesList().then(res => {
         console.log(res)

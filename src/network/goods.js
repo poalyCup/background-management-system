@@ -68,7 +68,7 @@ export function getAttrList (info) {
     url: `categories/112/attributes`,
     method: 'get',
     params: {
-      sel: 'only'
+      sel: 'many'
     }
   })
 }

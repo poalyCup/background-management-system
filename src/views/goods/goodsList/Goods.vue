@@ -15,7 +15,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="danger" @click="addGoods">添加商品</el-button>
+          <el-button type="danger" @click="addGoods" disabled>添加商品</el-button>
         </el-col>
       </el-row>
       <GoodsList :goodsList="goodsList"></GoodsList>
