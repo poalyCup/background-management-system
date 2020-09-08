@@ -30,6 +30,8 @@ const routes = [
       {path: '/goods', component: () => import('views/goods/goodsList/Goods.vue')},
       {path: '/goods/add', component: () => import('views/goods/goodsList/AddGoods.vue')},
       {path: '/orders', component: () => import('views/orders/Orders.vue')},
+      {path: '/reports', component: () => import('views/reports/Reports.vue')},
+
 
 
     ]

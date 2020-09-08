@@ -8,7 +8,21 @@ module.exports = {
         views: '@/views',
         network: '@/network'
       }
+    },
+
+    externals: {
+      vue: 'Vue',
+      echarts: 'echarts',
+      axios: 'axios',
+      'vue-router': 'VueRouter'
     }
-  }
+  },
+
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ],
+
+  
 
 }
