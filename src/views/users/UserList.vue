@@ -85,7 +85,6 @@ export default {
     //获取用户列表事件
     _getUserList(query = this.queryInfo){
       getUsersList(query).then(res => {
-        console.log(res)
         if (res.meta.status !== 200) return this.$message.error('用户列表获取失败！')
         this.userList = res.data.users
         this.total = res.data.total

@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request (config) {
     const instance = axios.create({
         // baseURL: "http://127.0.0.1:8888/api/private/v1/",
-        baseURL: 'http://101.132.141.242:8888/api/private/v1/',
+        baseURL: 'http://api.airpass.top/',
         timeout: 3000
     })
     //axios拦截器

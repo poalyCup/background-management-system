@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Welcome from '../views/home/Welcome.vue'
-import Users from '../views/users/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -14,25 +13,23 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login
+    component: () => import('components/Login.vue')
   },
   {
     path: '/home',
-    component: Home,
-    redirect: '/orders',
+    component: () => import('components/Home.vue'),
+    redirect: '/welcome',
     children: [
-      {path: '/welcome', component: Welcome},
-      {path: '/users', component: Users},
-      {path: '/rights', component: () => import('../views/power/Rights.vue')},
-      {path: '/roles', component: () => import('../views/power/Roles.vue')},
+      {path: '/welcome', component: () => import('views/home/Welcome.vue')},
+      {path: '/users', component: () => import('views/users/Users.vue')},
+      {path: '/rights', component: () => import('views/power/Rights.vue')},
+      {path: '/roles', component: () => import('views/power/Roles.vue')},
       {path: '/categories', component: () => import('views/goods/CateList/Categories.vue')},
       {path: '/params', component: () => import('views/goods/CateParams/CateParams.vue')},
       {path: '/goods', component: () => import('views/goods/goodsList/Goods.vue')},
       {path: '/goods/add', component: () => import('views/goods/goodsList/AddGoods.vue')},
       {path: '/orders', component: () => import('views/orders/Orders.vue')},
       {path: '/reports', component: () => import('views/reports/Reports.vue')},
-
-
 
     ]
   }

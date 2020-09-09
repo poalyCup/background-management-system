@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     handleCateChange () {
-      console.log(this.cateKeys)
       this._getAttrList()
     },
     //tab栏点击事件
@@ -75,7 +74,6 @@ export default {
     },
     //根据id和参数类型获取参数列表
     _getAttrList () {
-      console.log('_getAttrList')
       const info = {}
       info.id = this.cateKeys[this.cateKeys.length -1]
       info.sel = this.activeName

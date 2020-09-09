@@ -147,7 +147,6 @@ export default {
     //网络请求方法
     _getOrdersList () {
       getOrdersList(this.queryInfo).then(res => {
-        console.log(res)
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
         this.total = res.data.total
         this.orderList = res.data.goods
