@@ -1,4 +1,7 @@
 module.exports = {
+  dev:{
+    port: 8666
+  },
   configureWebpack: {
     resolve: {
       alias: {
